@@ -360,7 +360,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-12">
+          <div className="grid md:grid-cols-3 gap-12">
             <div>
               <div className="flex items-center space-x-2 mb-6">
                 <img 
