@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Monitor, Printer, Camera, Code2, Mail, MapPin, ChevronDown, Menu, X } from 'lucide-react';
+import { Monitor, Printer, Camera, Code2, Mail, MapPin, ChevronDown, Menu, X, PhoneCall } from 'lucide-react';
+import logo from './assets/logo.png';
+
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,17 +50,18 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Enhanced Sticky Navbar */}
+      {/* Sticky Navbar */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-2">
-              <Monitor className={`w-8 h-8 ${scrolled ? 'text-blue-600' : 'text-white'}`} />
-              <span className={`text-2xl font-bold ${scrolled ? 'text-gray-900' : 'text-white'}`}>
-                Mat Tech Services
-              </span>
+              <img 
+                src={logo}
+                alt="MFTS Logo" 
+                className="h-20 w-auto"
+              />
             </div>
             
             {/* Desktop Menu */}
@@ -144,7 +147,7 @@ function App() {
         </div>
       </nav>
 
-      {/* Enhanced Hero Section with Image Slideshow */}
+      {/* Hero Section */}
       <div ref={heroRef} className="relative h-screen">
         <div className="absolute inset-0 overflow-hidden">
           {slides.map((slide, index) => (
@@ -199,7 +202,7 @@ function App() {
         </div>
       </div>
 
-      {/* Enhanced About Section */}
+      {/* About Section */}
       <div ref={aboutRef} className="py-32 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -235,7 +238,7 @@ function App() {
         </div>
       </div>
 
-      {/* Enhanced Services Section */}
+      {/* Services Section */}
       <div ref={servicesRef} className="py-32 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-20">
@@ -271,7 +274,7 @@ function App() {
         </div>
       </div>
 
-      {/* Enhanced Contact Section */}
+      {/* Contact Section */}
       <div ref={contactRef} className="py-32 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-20">
@@ -331,17 +334,17 @@ function App() {
                   <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                   <div>
                     <p className="text-gray-600 text-lg">
-                      Av. Tecnológica #123<br />
-                      Col. Innovación<br />
+                      Providencia #821<br />
+                      Col. Del valle<br />
                       Ciudad de México, CDMX<br />
-                      CP 12345
+                      CP. 03100
                     </p>
                   </div>
                 </div>
               </div>
               <div className="h-80 bg-gray-200 rounded-2xl overflow-hidden shadow-xl">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.761737654654!2d-99.13305674947845!3d19.432608986829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f92d2e0e4dbd%3A0x905574a740c4893!2sZocalo!5e0!3m2!1sen!2smx!4v1645764245784!5m2!1sen!2smx"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.53003652746!2d-99.1687267522265!3d19.3894917022157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff7e2ede5541%3A0x7de52deb216f9fa9!2sMat%20Fleet%20Tech%20Services%20%5BMFTS%5D!5e0!3m2!1ses-419!2smx!4v1744944501756!5m2!1ses-419!2smx" 
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -354,14 +357,17 @@ function App() {
         </div>
       </div>
 
-      {/* Enhanced Footer */}
+      {/* Footer */}
       <footer className="bg-gray-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-12">
             <div>
               <div className="flex items-center space-x-2 mb-6">
-                <Monitor className="w-8 h-8 text-blue-400" />
-                <span className="text-2xl font-bold">Mat Tech Services</span>
+                <img 
+                  src={logo}
+                  alt="MFTS Logo" 
+                  className="h-16 w-auto"
+                />
               </div>
               <p className="text-gray-400 text-lg">
                 Soluciones tecnológicas integrales para empresas modernas.
@@ -392,7 +398,7 @@ function App() {
                 </li>
               </ul>
             </div>
-            <div>
+            {/* <div>
               <h4 className="text-xl font-semibold mb-6">Blog</h4>
               <ul className="space-y-4">
                 <li>
@@ -411,23 +417,27 @@ function App() {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <h4 className="text-xl font-semibold mb-6">Contacto</h4>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <Mail className="w-6 h-6 text-blue-400" />
-                  <span className="text-gray-400">info@mattechservices.com</span>
+                  <span className="text-gray-400">cdc@mattechservices.mx</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="w-6 h-6 text-blue-400" />
-                  <span className="text-gray-400">CDMX, México</span>
+                  <PhoneCall className="w-6 h-6 text-blue-400" />
+                  <span className="text-gray-400">Tel: 5589852173</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <PhoneCall className="w-6 h-6 text-blue-400" />
+                  <span className="text-gray-400">Tel: 5589852174</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-16 pt-8 text-center">
-            <p className="text-gray-400">&copy; 2024 Mat Tech Services. Todos los derechos reservados.</p>
+            <p className="text-gray-400">&copy; 2024 Mat Fleet Tech Services. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>
