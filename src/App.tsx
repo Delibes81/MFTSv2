@@ -1,13 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Monitor, Printer, Camera, Code2, Mail, MapPin, ChevronDown, Menu, X, PhoneCall } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import logo from './assets/logo.png';
-
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
+  const formRef = useRef<HTMLFormElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
@@ -46,6 +52,44 @@ function App() {
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     setIsMenuOpen(false);
     ref.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const formData = new FormData(formRef.current);
+      const templateParams = {
+        from_name: formData.get('user_name'),
+        from_email: formData.get('user_email'),
+        phone_number: formData.get('phone_number'),
+        message: formData.get('message'),
+      };
+
+      await emailjs.send(
+        'service_uejh3ir',
+        'template_cqxfu2r',
+        templateParams,
+        'p-pwDfd7VH5ssWyvj'
+      );
+
+      setSubmitStatus({
+        type: 'success',
+        message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.'
+      });
+      formRef.current.reset();
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -288,13 +332,22 @@ function App() {
           <div className="grid md:grid-cols-2 gap-16">
             <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow">
               <h3 className="text-2xl font-bold mb-8">Envíanos un mensaje</h3>
-              <form className="space-y-6">
+              {submitStatus.type && (
+                <div className={`mb-6 p-4 rounded-lg ${
+                  submitStatus.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
+                }`}>
+                  {submitStatus.message}
+                </div>
+              )}
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Nombre
                   </label>
                   <input
                     type="text"
+                    name="from_name"
+                    required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="Tu nombre completo"
                   />
@@ -305,8 +358,22 @@ function App() {
                   </label>
                   <input
                     type="email"
+                    name="from_email"
+                    required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="tu@email.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Teléfono
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone_number"
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                    placeholder="Tu número de teléfono"
                   />
                 </div>
                 <div>
@@ -314,6 +381,8 @@ function App() {
                     Mensaje
                   </label>
                   <textarea
+                    name="message"
+                    required
                     rows={4}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="¿Cómo podemos ayudarte?"
@@ -321,9 +390,12 @@ function App() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all"
+                  disabled={isSubmitting}
+                  className={`w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                    isSubmitting ? 'animate-pulse' : ''
+                  }`}
                 >
-                  Enviar Mensaje
+                  {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
                 </button>
               </form>
             </div>
@@ -398,26 +470,6 @@ function App() {
                 </li>
               </ul>
             </div>
-            {/* <div>
-              <h4 className="text-xl font-semibold mb-6">Blog</h4>
-              <ul className="space-y-4">
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                    Ciberseguridad Empresarial
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                    Cloud Computing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                    Mejores Prácticas IT
-                  </a>
-                </li>
-              </ul>
-            </div> */}
             <div>
               <h4 className="text-xl font-semibold mb-6">Contacto</h4>
               <div className="space-y-4">
