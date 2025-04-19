@@ -255,7 +255,7 @@ function App() {
                 Tu Socio Tecnológico de <span className="text-blue-600">Confianza</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                En Mat Tech Services, combinamos experiencia y pasión por la tecnología para 
+                En Mat Fleet Tech Services, combinamos experiencia y pasión por la tecnología para 
                 ofrecer soluciones que impulsan el crecimiento de tu empresa.
               </p>
               <div className="grid grid-cols-2 gap-6">
