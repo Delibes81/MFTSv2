@@ -346,7 +346,7 @@ function App() {
                   </label>
                   <input
                     type="text"
-                    name="from_name"
+                    name="name"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="Tu nombre completo"
@@ -358,7 +358,7 @@ function App() {
                   </label>
                   <input
                     type="email"
-                    name="from_email"
+                    name="email"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="tu@email.com"
@@ -370,7 +370,7 @@ function App() {
                   </label>
                   <input
                     type="tel"
-                    name="phone_number"
+                    name="number"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="Tu número de teléfono"
