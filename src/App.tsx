@@ -64,9 +64,9 @@ function App() {
     try {
       const formData = new FormData(formRef.current);
       const templateParams = {
-        from_name: formData.get('user_name'),
-        from_email: formData.get('user_email'),
-        phone_number: formData.get('phone_number'),
+        name: formData.get('user_name'),
+        email: formData.get('user_email'),
+        number: formData.get('phone_number'),
         message: formData.get('message'),
       };
 
