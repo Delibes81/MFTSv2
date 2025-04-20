@@ -54,44 +54,45 @@ function App() {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  /*submit emailjs */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
-
+  
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
-
+  
     try {
       const formData = new FormData(formRef.current);
       const templateParams = {
-        name: formData.get('user_name'),
-        email: formData.get('user_email'),
-        number: formData.get('phone_number'),
-        message: formData.get('message'),
+        from_name: formData.get('from_name') as string,
+        from_email: formData.get('from_email') as string,
+        phone_number: formData.get('phone_number') as string,
+        message: formData.get('message') as string,
       };
-
+  
       await emailjs.send(
         'service_uejh3ir',
         'template_cqxfu2r',
         templateParams,
         'p-pwDfd7VH5ssWyvj'
       );
-
+  
       setSubmitStatus({
         type: 'success',
-        message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.'
+        message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.',
       });
       formRef.current.reset();
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.'
+        message: 'Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.',
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
+  
   return (
     <div className="min-h-screen bg-white">
       {/* Sticky Navbar */}
@@ -255,7 +256,7 @@ function App() {
                 Tu Socio Tecnológico de <span className="text-blue-600">Confianza</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                En Mat Fleet Tech Services, combinamos experiencia y pasión por la tecnología para 
+                En Mat Feet Tech Services, combinamos experiencia y pasión por la tecnología para 
                 ofrecer soluciones que impulsan el crecimiento de tu empresa.
               </p>
               <div className="grid grid-cols-2 gap-6">
@@ -346,7 +347,7 @@ function App() {
                   </label>
                   <input
                     type="text"
-                    name="name"
+                    name="from_name"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="Tu nombre completo"
@@ -358,7 +359,7 @@ function App() {
                   </label>
                   <input
                     type="email"
-                    name="email"
+                    name="from_email"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="tu@email.com"
@@ -370,7 +371,7 @@ function App() {
                   </label>
                   <input
                     type="tel"
-                    name="number"
+                    name="phone_number"
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     placeholder="Tu número de teléfono"
